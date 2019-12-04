@@ -20,6 +20,7 @@ Follow the tutorial before clone this project.
 Go to src/main/resources/application.yml and change the following
 
 # Spring security Oauth2
+`
 spring:
   security:
     oauth2:
@@ -28,9 +29,9 @@ spring:
           azure:
             client-id: <<CLIENT_ID>>
             client-secret: <<CLIENT_SECRET>>
-'
+`
 # Azure Activedirectory configuration
-'
+`
 azure:
   activedirectory:
     tenant-id: <<YOUR_TENANT_ID>>
@@ -38,7 +39,7 @@ azure:
   b2c:
     reply-url: http://localhost:9000 # should be absolute url.
     logout-success-url: http://localhost:9000
-'
+`
 # Edited file from original JHipster:
 
 * SecurityConfiguration.java
