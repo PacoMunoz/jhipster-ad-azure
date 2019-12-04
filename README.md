@@ -44,10 +44,10 @@ azure:
 
 * SecurityConfiguration.java
 * LogoutResource.java
-    * From this.registration = registrations.findByRegistrationId("oidc");
-    * To this.registration = registrations.findByRegistrationId("azure");
+    * From ```this.registration = registrations.findByRegistrationId("oidc");```
+    * To   ```this.registration = registrations.findByRegistrationId("azure");```
     * Change is in logout method because
-        this.registration.getProviderDetails().getConfigurationMetadata().get("end_session_endpoint") is null
+        ```this.registration.getProviderDetails().getConfigurationMetadata().get("end_session_endpoint")``` is null
 * login.service.ts
-    * From location.href = `${location.origin}${this.location.prepareExternalUrl('oauth2/authorization/oidc')}`;
-    * TO location.href = `${location.origin}${this.location.prepareExternalUrl('oauth2/authorization/azure')}`;
+    * From ``` location.href = `${location.origin}${this.location.prepareExternalUrl('oauth2/authorization/oidc')}`; ```
+    * TO   ``` location.href = `${location.origin}${this.location.prepareExternalUrl('oauth2/authorization/azure')}`; ```
