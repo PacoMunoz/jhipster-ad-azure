@@ -19,34 +19,34 @@ Follow the tutorial before clone this project.
 
 Go to src/main/resources/application.yml and change the following
 
-## Spring security Oauth2
+# Spring security Oauth2
 spring:
-security:
-oauth2:
-client:
-registration:
+  security:
+    oauth2:
+      client:
+        registration:
+          azure:
+            client-id: <<CLIENT_ID>>
+            client-secret: <<CLIENT_SECRET>>
+'
+# Azure Activedirectory configuration
+'
 azure:
-client-id: <<CLIENT_ID>>
-client-secret: <<CLIENT_SECRET>>
+  activedirectory:
+    tenant-id: <<YOUR_TENANT_ID>>
+    active-directory-groups: Users
+  b2c:
+    reply-url: http://localhost:9000 # should be absolute url.
+    logout-success-url: http://localhost:9000
+'
+# Edited file from original JHipster:
 
-## Azure Activedirectory configuration
-azure:
-activedirectory:
-tenant-id: <<YOUR_TENANT_ID>>
-active-directory-groups: Users
-b2c:
-reply-url: http://localhost:9000 # should be absolute url.
-logout-success-url: http://localhost:9000
-
-## Edited file from original JHipster:
-
-- SecurityConfiguration.java
-- LogoutResource.java
-  In Constructor from this.registration = registrations.findByRegistrationId("oidc");
-  To this.registration = registrations.findByRegistrationId("azure");
-  Another change in logout method because
-  this.registration.getProviderDetails().getConfigurationMetadata().get("end_session_endpoint")
-  return null
-- login.service.ts
-  From location.href = `${location.origin}${this.location.prepareExternalUrl('oauth2/authorization/oidc')}`;
-  TO location.href = `${location.origin}${this.location.prepareExternalUrl('oauth2/authorization/azure')}`;
+* SecurityConfiguration.java
+* LogoutResource.java
+    * From this.registration = registrations.findByRegistrationId("oidc");
+    * To this.registration = registrations.findByRegistrationId("azure");
+    * Change is in logout method because
+        this.registration.getProviderDetails().getConfigurationMetadata().get("end_session_endpoint") is null
+* login.service.ts
+    * From location.href = `${location.origin}${this.location.prepareExternalUrl('oauth2/authorization/oidc')}`;
+    * TO location.href = `${location.origin}${this.location.prepareExternalUrl('oauth2/authorization/azure')}`;
