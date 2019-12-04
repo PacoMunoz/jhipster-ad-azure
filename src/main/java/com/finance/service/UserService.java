@@ -2,14 +2,13 @@ package com.finance.service;
 
 import com.finance.config.Constants;
 import com.finance.service.dto.UserDTO;
-
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -52,6 +51,9 @@ public class UserService {
             user.setLogin(((String) details.get("preferred_username")).toLowerCase());
         } else if (user.getLogin() == null) {
             user.setLogin(user.getId());
+        }
+        if (details.get("name") != null) {
+            user.setLogin(details.get("name").toString());
         }
         if (details.get("given_name") != null) {
             user.setFirstName((String) details.get("given_name"));

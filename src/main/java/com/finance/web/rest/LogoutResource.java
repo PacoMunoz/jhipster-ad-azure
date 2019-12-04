@@ -13,14 +13,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
-* REST controller for managing global OIDC logout.
-*/
+ * REST controller for managing global OIDC logout.
+ */
 @RestController
 public class LogoutResource {
     private ClientRegistration registration;
 
     public LogoutResource(ClientRegistrationRepository registrations) {
-        this.registration = registrations.findByRegistrationId("oidc");
+        this.registration = registrations.findByRegistrationId("azure");
     }
 
     /**
@@ -33,8 +33,11 @@ public class LogoutResource {
     @PostMapping("/api/logout")
     public ResponseEntity<?> logout(HttpServletRequest request,
                                     @AuthenticationPrincipal(expression = "idToken") OidcIdToken idToken) {
-        String logoutUrl = this.registration.getProviderDetails()
-            .getConfigurationMetadata().get("end_session_endpoint").toString();
+        final String logoutUrl;
+        if (this.registration.getProviderDetails().getConfigurationMetadata().isEmpty())
+            logoutUrl = "https://login.windows.net/common/oauth2/logout";
+        else
+            logoutUrl = this.registration.getProviderDetails().getConfigurationMetadata().get("end_session_endpoint").toString();
 
         Map<String, String> logoutDetails = new HashMap<>();
         logoutDetails.put("logoutUrl", logoutUrl);
