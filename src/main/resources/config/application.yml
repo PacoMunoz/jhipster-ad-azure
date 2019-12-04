@@ -93,8 +93,8 @@ spring:
       client:
         registration:
           azure:
-            client-id: 786b944f-754a-472e-95ac-eb738cc576ef
-            client-secret: One.6X9q?.MyYaUQ/crKdQN5NV8AruAx
+            client-id: <<CLIENT_ID>>
+            client-secret: <<CLIENT_SECRET>>
 #        provider:
 #          oidc:
 #            issuer-uri: http://localhost:9080/auth/realms/jhipster
@@ -161,7 +161,7 @@ jhipster:
 # application:
 azure:
   activedirectory:
-    tenant-id: 268f2fc6-021a-4d0b-8ed4-3aa23c7124c7
+    tenant-id: <<YOUR_TENANT_ID>>
     active-directory-groups: Users
     b2c:
       reply-url: http://localhost:9000 # should be absolute url.
